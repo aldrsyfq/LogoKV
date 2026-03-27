@@ -1,31 +1,38 @@
 @import url('https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&display=swap');
+
 @font-face {
     font-family: "RBNo3.1 Bold";
     src: local("RBNo3.1 Bold"),
-         url("./Font/RBNo3.1-Bold.otf") format("opentype");
+        url("./Font/RBNo3.1-Bold.otf") format("opentype");
     font-weight: 700;
     font-style: normal;
     font-display: swap;
 }
+
 @font-face {
     font-family: "RBNo3.1";
     src: local("RBNo3.1 Book"),
-         url("./Font/RBNo3.1-Book.otf") format("opentype");
+        url("./Font/RBNo3.1-Book.otf") format("opentype");
     font-weight: 400;
     font-style: normal;
     font-display: swap;
 }
+
 :root {
+    /* WEBSITE COLOR */
+    --primary-color: #1b156d;
     --md-sys-color-primary: #0061a4;
     --md-sys-color-on-primary: #e00000;
-    --md-sys-color-primary-container: #a7ccff;
+    --md-sys-color-primary-container: skyblue;
     --md-sys-color-on-primary-container: #001d36;
     --md-sys-color-surface: #eef;
     --md-sys-color-surface-variant: #e0e2ec;
     --md-sys-color-on-surface: #1a1c1e;
+    --rounded-corner: 8px;
     --logo-mark-width: 100px;
     --logo-subheading-width: 240px;
     --bottom-text-width: 240px;
+    /* LOGO COLOR */
 }
 
 * {
@@ -33,7 +40,7 @@
 }
 
 body {
-    font-family: 'RBNo3.1 Bold', sans-serif;
+    font-family: 'RBNo3.1', sans-serif;
     background-color: var(--md-sys-color-surface);
     color: var(--md-sys-color-on-surface);
     margin: 0;
@@ -42,50 +49,42 @@ body {
     overflow-x: hidden;
 }
 
-h1 {
-    letter-spacing: 2px;
-}
-
-.top-header {
+.navi {
     width: 100%;
-    background-color: darkblue;
-    border-bottom: 1px solid var(--md-sys-color-surface-variant);
+    background-color: var(--primary-color);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 24px 18px;
+    padding: 16px 24px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
 }
 
-.top-header h1 {
+.navi h1 {
     margin: 0;
     font-size: 1.4rem;
     color: white;
     font-family: 'RBNo3.1 Bold', 'Roboto', sans-serif;
 }
 
-.main-container {
-    width: 90%;
-    max-width: 480px;
-    margin: 16px auto 0;
-    text-align: center;
-}
-
 .preview-card {
-    background-color: white;
-    border: 1px solid var(--md-sys-color-surface-variant);
-    border-top: none;
-    border-left: none;
-    border-right: none;
+    background-color: #ffffff;
+    background-image:
+        linear-gradient(45deg, #f1f1f1 25%, transparent 25%),
+        linear-gradient(-45deg, #f1f1f1 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, #f1f1f1 75%),
+        linear-gradient(-45deg, transparent 75%, #f1f1f1 75%);
+    background-size: 20px 20px;
+    background-position: 0 0, 0 10px, 10px -10px, -10px 0;
+    border-bottom: 1px solid var(--md-sys-color-surface-variant);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 100%;
-    margin-left: 0;
-    margin-right: 0;
-    position: sticky;
-    top: 0;
-    z-index: 20;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    height: 320px !important;
+    user-select: none;
 }
 
 .logo-preview {
@@ -94,6 +93,17 @@ h1 {
     align-items: flex-start;
     gap: 4px;
     padding: 64px 0px;
+    height: 210px !important;
+}
+
+#logo-container {
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    transform-origin: center;
+}
+
+#logo-container.zoomed {
+    transform: scale(1.5);
 }
 
 .logo-mark-wrap {
@@ -116,7 +126,6 @@ h1 {
     flex-direction: column;
     align-items: stretch;
     min-width: 0;
-    line-height: 1;
     gap: 2px;
 }
 
@@ -197,12 +206,35 @@ h1 {
     overflow: visible;
 }
 
-/* ### BUTTON STYLING ### */
-.controls {
+/* END OF LOGO PREVIEW */
+
+.panel-container {
+    max-width: 640px;
+    width: 100%;
+    margin: 10px auto;
+    gap: 24px;
+    display: flex;
+    flex-direction: row;
+    margin-top: 24px;
+    align-items: flex-start;
+}
+
+.panel-container .controls {
+    width: 60%;
     display: flex;
     flex-direction: column;
     gap: 16px;
-    margin-top: 16px;
+}
+
+.panel-container .description {
+    width: 40%;
+    text-align: justify;
+    font-size: 0.9rem;
+    color: grey;
+}
+
+.panel-container .description p {
+    line-height: 1.4rem;
 }
 
 #text-input-top,
@@ -211,12 +243,11 @@ h1 {
 #text-input-mark-bottom {
     width: 100%;
     padding: 18px 24px;
-    border-radius: 16px;
+    border-radius: var(--rounded-corner);
     border: 1px solid var(--md-sys-color-surface-variant);
     background-color: var(--md-sys-color-surface-variant);
     font-size: 1rem;
-    outline: none;
-    transition: border 0.2s;
+    transition: border-color 0.2s, box-shadow 0.2s;
 }
 
 #text-input-top {
@@ -231,26 +262,35 @@ h1 {
 #text-input-bottom:focus,
 #text-input-subheading:focus,
 #text-input-mark-bottom:focus {
-    border: 2px solid var(--md-sys-color-primary);
-    padding: 17px 23px; /* Adjust for border thickness */
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(27, 21, 109, 0.22);
+}
+
+#text-input-top:focus-visible,
+#text-input-bottom:focus-visible,
+#text-input-subheading:focus-visible,
+#text-input-mark-bottom:focus-visible {
+    border-color: var(--primary-color);
+    outline: none;
 }
 
 .input-group label {
+    font-weight: bold;
     display: block;
     text-align: left;
-    margin-bottom: 8px;
-    margin-top: 8px;
-    font-size: 0.9rem;
-    color: #44474e;
+    margin-bottom: 12px;
+    font-size: 1rem;
+    color: var(--md-sys-color-on-surface);
 }
 
 .toggle-row {
     display: flex !important;
-    justify-content: center;
+    justify-content: left;
     align-items: center;
     gap: 12px;
     font-weight: bold;
-    padding: 8px;
+    cursor: pointer;
 }
 
 .preview-toggle-group {
@@ -259,58 +299,165 @@ h1 {
 }
 
 .toggle-row span {
-    font-size: 0.9rem;
-    font-family: 'RBNo3.1', 'Roboto', sans-serif;
+    font-size: 1rem;
+    color: var(--md-sys-color-on-surface);
 }
 
 #advanced-toggle {
-    appearance: none;
-    -webkit-appearance: none;
-    width: 44px;
-    height: 24px;
-    border-radius: 999px;
-    background-color: #b8bcc8;
-    border: none;
-    position: relative;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-}
-
-#advanced-toggle::before {
-    content: "";
     position: absolute;
-    top: 3px;
-    left: 3px;
-    width: 18px;
-    height: 18px;
-    border-radius: 50%;
-    background-color: #fff;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
-    transition: transform 0.2s ease;
-}
-
-#advanced-toggle:checked {
-    background-color: var(--md-sys-color-primary);
-}
-
-#advanced-toggle:checked::before {
-    transform: translateX(20px);
+    opacity: 0;
+    width: 1px;
+    height: 1px;
+    pointer-events: none;
 }
 
 #advanced-toggle:focus-visible {
+    outline: none;
+}
+
+.advance-chevron {
+    width: 18px;
+    height: 18px;
+    stroke: var(--primary-color);
+    stroke-width: 2.5;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transform: rotate(0deg);
+    transform-origin: 50% 50%;
+    transition: transform 0.5s ease-in-out;
+}
+
+#advanced-toggle:checked+.advance-chevron {
+    transform: rotate(180deg);
+}
+
+#advanced-toggle:focus-visible+.advance-chevron {
     outline: 2px solid var(--md-sys-color-primary);
-    outline-offset: 2px;
+    outline-offset: 3px;
+    border-radius: 4px;
 }
 
 .advanced-inputs {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 12px;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out;
+    pointer-events: none;
 }
 
+.advanced-inputs.expanded {
+    max-height: 640px;
+    opacity: 1;
+    pointer-events: auto;
+}
 
 .hidden {
-    display: none;
+    max-height: 0 !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+
+.toggle-row {
+    display: flex !important;
+    justify-content: left;
+    align-items: center;
+    gap: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.5s ease-in-out, color 0.5s ease-in-out;
+}
+
+.bg-swatches {
+    border-radius: var(--rounded-corner);
+    border: 1px solid var(--md-sys-color-surface-variant);
+    display: flex;
+    gap: 0px;
+    flex-wrap: wrap;
+}
+
+.bg-swatch {
+    width: 25%;
+    height: 32px;
+    border: none;
+    cursor: pointer;
+    transition: border-color 0.2s, transform 0.1s;
+    background-size: 8px 8px;
+}
+
+.bg-swatch:first-child {
+    background-color: white;
+    border-top-left-radius: var(--rounded-corner);
+    border-bottom-left-radius: var(--rounded-corner);
+}
+
+.bg-swatch:last-child {
+    background-color: black;
+    border-top-right-radius: var(--rounded-corner);
+    border-bottom-right-radius: var(--rounded-corner);
+}
+
+.bg-swatch[data-bg="solid-white"] {
+    background-color: white;
+}
+
+.bg-swatch[data-bg="solid-black"] {
+    background-color: black;
+}
+
+.bg-swatch[data-bg="checkered-white"] {
+    background-color: white;
+    background-image:
+        linear-gradient(45deg, #f0f0f0 25%, transparent 25%),
+        linear-gradient(-45deg, #f0f0f0 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, #f0f0f0 75%),
+        linear-gradient(-45deg, transparent 75%, #f0f0f0 75%);
+    background-position: 0 0, 0 4px, 4px -4px, -4px 0px;
+}
+
+.bg-swatch[data-bg="checkered-black"] {
+    background-color: black;
+    background-image:
+        linear-gradient(45deg, #333 25%, transparent 25%),
+        linear-gradient(-45deg, #333 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, #333 75%),
+        linear-gradient(-45deg, transparent 75%, #333 75%);
+    background-position: 0 0, 0 4px, 4px -4px, -4px 0px;
+}
+
+.preview-card.bg-solid-white {
+    background-color: white;
+    background-image: none;
+}
+
+.preview-card.bg-solid-black {
+    background-color: black;
+    background-image: none;
+}
+
+.preview-card.bg-checkered-white {
+    background-color: white;
+    background-image:
+        linear-gradient(45deg, #f0f0f0 25%, transparent 25%),
+        linear-gradient(-45deg, #f0f0f0 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, #f0f0f0 75%),
+        linear-gradient(-45deg, transparent 75%, #f0f0f0 75%);
+    background-size: 20px 20px;
+    background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+}
+
+.preview-card.bg-checkered-black {
+    background-color: black;
+    background-image:
+        linear-gradient(45deg, #333 25%, transparent 25%),
+        linear-gradient(-45deg, #333 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, #333 75%),
+        linear-gradient(-45deg, transparent 75%, #333 75%);
+    background-size: 20px 20px;
+    background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
 }
 
 #download-btn {
@@ -318,17 +465,17 @@ h1 {
     background-color: var(--md-sys-color-primary-container);
     color: var(--md-sys-color-on-primary-container);
     display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
+    align-items: left;
+    justify-content: left;
+    gap: 12px;
     border: none;
     padding: 18px;
     font-size: 1rem;
     font-weight: 500;
-    border-radius: 16px;
+    border-radius: var(--rounded-corner);
     cursor: pointer;
     transition: transform 0.1s, box-shadow 0.2s;
-    font-family: 'RBNo3.1', 'Roboto', sans-serif;
+    font-family: 'RBNo3.1 Bold', 'Roboto', sans-serif;
 }
 
 .download-icon {
@@ -338,8 +485,7 @@ h1 {
 }
 
 #download-btn:hover {
-    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-    font-weight: 900;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
 #download-btn:active {
@@ -381,54 +527,17 @@ h1 {
     opacity: 0.75;
 }
 
-
-
-
-@media (max-width: 600px) {
-    :root {
-        --logo-mark-width: 82px;
-        --logo-subheading-width: 182px;
-        --bottom-text-width: 182px;
+@media (max-width: 660px) {
+    .panel-container {
+        flex-direction: column;
+        width: calc(100% - 40px);
     }
 
-    .top-header {
-        padding: 12px 16px;
+    .panel-container .controls {
+        width: 100%;
     }
 
-    .preview-card {
-        gap: 12px;
-    }
-
-    .logo-preview {
-        padding: 32px 0px;
-    }
-
-    #logo-text-top {
-        font-size: 27px;
-    }
-
-    #logo-text-subheading {
-        font-size: 11px;
-    }
-
-    #logo-text-bottom {
-        font-size: 22px;
-    }
-
-    #logo-text-mark-bottom {
-        font-size: 8px;
-    }
-
-    .main-container {
-        width: 92%;
-        margin-top: 12px;
-    }
-
-    #text-input-top,
-    #text-input-bottom,
-    #text-input-subheading,
-    #text-input-mark-bottom,
-    #download-btn {
-        padding: 14px 16px;
+    .panel-container .description {
+        width: 100%;
     }
 }

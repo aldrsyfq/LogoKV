@@ -1,71 +1,95 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create a KV Logo</title>
+    <title>LogoKV - Kolej Vokasional Logo Maker</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/png" href="LogoKV.ico">
 </head>
+
 <body>
-    <div class="top-header">
-        <h1>aldrsyfq/LogoKV</h1>
-        <a href="https://www.youtube.com/@aldrsyfq" target="_blank" rel="noopener noreferrer"><img src="youtube.ico" alt="YouTube" style="width: 24px; height: 24px; filter: brightness(100);"></a>
+    <div class="navi">
+        <h1>LogoKV</h1>
+        <a href="https://www.youtube.com/@aldrsyfq" target="_blank" rel="noopener noreferrer"><img src="youtube.ico"
+                alt="YouTube" style="width: 24px; height: 24px; filter: brightness(100);"></a>
     </div>
-    <div class="preview-card">
+    <div class="preview-card bg-solid-white">
         <div class="logo-preview" id="logo-container">
             <div class="logo-mark-wrap">
-                    <img class="kv-logo" src="kvlogo.png" alt="KV Logo">
-                    <span id="logo-text-mark-bottom">bersama membina masa depan</span>
-                </div>
-                <div class="logo-text-wrap">
-                    <span id="logo-text-top">KOLEJ VOKASIONAL</span>
-                    <span id="logo-text-subheading">KEMENTERIAN PENDIDIKAN MALAYSIA</span>
-                    <span class="text-divider"></span>
-                    <span id="logo-text-bottom"></span>
-                </div>
+                <img class="kv-logo" src="kvlogo.png" alt="KV Logo">
+                <span id="logo-text-mark-bottom">bersama membina masa depan</span>
             </div>
-            <div class="input-group preview-toggle-group">
-                <label class="toggle-row" for="advanced-toggle">
-                    <span>Advance</span>
-                    <input type="checkbox" id="advanced-toggle">
-                </label>
+            <div class="logo-text-wrap">
+                <span id="logo-text-top">KOLEJ VOKASIONAL</span>
+                <span id="logo-text-subheading">KEMENTERIAN PENDIDIKAN MALAYSIA</span>
+                <span class="text-divider"></span>
+                <span id="logo-text-bottom"></span>
             </div>
         </div>
+    </div>
 
-    <div class="main-container">
+    <div class="panel-container">
         <div class="controls">
             <div class="input-group">
-                <label for="text-input-bottom">Nama Kolej</label>
+                <label for="bg-toggle">Background Color</label>
+                <div class="bg-swatches">
+                    <button class="bg-swatch" data-bg="solid-white" aria-label="Solid White background"></button>
+                    <button class="bg-swatch" data-bg="checkered-white"
+                        aria-label="Checkered White background"></button>
+                    <button class="bg-swatch" data-bg="solid-black" aria-label="Solid Black background"></button>
+                    <button class="bg-swatch" data-bg="checkered-black"
+                        aria-label="Checkered Black background"></button>
+                </div>
+            </div>
+            <div class="input-group">
+                <label>Nama Kolej</label>
                 <input type="text" id="text-input-bottom" placeholder="KOLEJ VOKASIONAL..." maxlength="64">
             </div>
             <div id="advanced-inputs" class="advanced-inputs hidden">
                 <div class="input-group">
-                    <label for="text-input-top">Logo heading</label>
+                    <label>Logo heading</label>
                     <textarea id="text-input-top" placeholder="KOLEJ VOKASIONAL" rows="2" maxlength="32"></textarea>
                 </div>
                 <div class="input-group">
-                    <label for="text-input-subheading">Logo subheading</label>
-                    <input type="text" id="text-input-subheading" placeholder="KEMENTERIAN PENDIDIKAN MALAYSIA" maxlength="48">
+                    <label>Logo subheading</label>
+                    <input type="text" id="text-input-subheading" placeholder="KEMENTERIAN PENDIDIKAN MALAYSIA"
+                        maxlength="48">
                 </div>
                 <div class="input-group">
-                    <label for="text-input-mark-bottom">Bottom logo text</label>
-                    <input type="text" id="text-input-mark-bottom" placeholder="bersama membina masa depan" maxlength="32">
+                    <label>Bottom logo text</label>
+                    <input type="text" id="text-input-mark-bottom" placeholder="bersama membina masa depan"
+                        maxlength="32">
                 </div>
             </div>
-
-            <div class="actions">
-                <button id="download-btn">
-                    <img src="download.svg" alt="" class="download-icon" aria-hidden="true">
-                    Download PNG (HD)
-                </button>
-            </div>
+            <label class="toggle-row" for="advanced-toggle">
+                <span>Advance</span>
+                <input type="checkbox" id="advanced-toggle">
+                <svg class="advance-chevron" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <path d="M6 9 L12 15 L18 9"></path>
+                </svg>
+            </label>
         </div>
+        <aside class="description">
+            <div class="input-group">
+                <label>Download</label>
+                <div class="actions">
+                    <button id="download-btn">
+                        <img src="download.svg" alt="" class="download-icon" aria-hidden="true">Save to device (HD)
+                    </button>
+                </div>
+            </div>
+            <p>Use this tool to create a custom logo for your vocational college. Simply enter the details and click
+                "Download PNG (HD)" to save your creation.</p>
+            <p>You can now click on the logo preview to zoom in and view it in more detail.</p>
+            <p>Designed and developed with ❤︎⁠ by <strong>aldr syfq</strong>.</p>
+        </aside>
     </div>
 
     <script src="script.js"></script>
 </body>
-</html>
 
+</html>

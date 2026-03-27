@@ -10,6 +10,7 @@ const logoTextBottom = document.getElementById('logo-text-bottom');
 const logoTextMarkBottom = document.getElementById('logo-text-mark-bottom');
 const downloadBtn = document.getElementById('download-btn');
 const logoContainer = document.getElementById('logo-container');
+const previewCard = document.querySelector('.preview-card');
 const MARK_BOTTOM_MAX_SIZE = 9;
 const MARK_BOTTOM_MIN_SIZE = 3;
 const SUBHEADING_MAX_SIZE = 13;
@@ -72,7 +73,37 @@ textInputMarkBottom.addEventListener('input', (e) => {
 });
 
 advancedToggle.addEventListener('change', () => {
-    advancedInputs.classList.toggle('hidden', !advancedToggle.checked);
+    if (advancedToggle.checked) {
+        advancedInputs.classList.remove('hidden');
+        requestAnimationFrame(() => {
+            advancedInputs.classList.add('expanded');
+        });
+    } else {
+        advancedInputs.classList.remove('expanded');
+        advancedInputs.addEventListener('transitionend', function hideAfterTransition(event) {
+            if (event.propertyName === 'opacity') {
+                advancedInputs.classList.add('hidden');
+                advancedInputs.removeEventListener('transitionend', hideAfterTransition);
+            }
+        });
+    }
+});
+
+// Background swatches
+const bgSwatches = document.querySelectorAll('.bg-swatch');
+bgSwatches.forEach(button => {
+    button.addEventListener('click', () => {
+        bgSwatches.forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+        const bgType = button.dataset.bg;
+        previewCard.classList.remove('bg-solid-white', 'bg-solid-black', 'bg-checkered-white', 'bg-checkered-black');
+        previewCard.classList.add(`bg-${bgType}`);
+    });
+});
+
+// Logo zoom toggle
+logoContainer.addEventListener('click', () => {
+    logoContainer.classList.toggle('zoomed');
 });
 
 window.addEventListener('resize', fitMarkBottomText);
@@ -98,7 +129,7 @@ if (document.fonts && document.fonts.ready) {
 // Download Function
 downloadBtn.addEventListener('click', () => {
     // Increase render scale for a sharper exported PNG.
-    const exportScale = Math.max(4, window.devicePixelRatio || 1);
+    const exportScale = Math.max(8, window.devicePixelRatio || 1);
 
     // html2canvas takes the element and a settings object
     html2canvas(logoContainer, {
@@ -107,15 +138,17 @@ downloadBtn.addEventListener('click', () => {
         useCORS: true,         // Helps with loading external fonts/images
         onclone: (clonedDoc) => {
             const clonedLogoContainer = clonedDoc.getElementById('logo-container');
+            const clonedPreviewCard = clonedDoc.querySelector('.preview-card');
             const clonedMarkBottom = clonedDoc.getElementById('logo-text-mark-bottom');
 
-            if (clonedLogoContainer) {
+            if (clonedLogoContainer && clonedPreviewCard) {
                 // Export a tight, vertically centered crop of the logo only.
                 clonedLogoContainer.style.paddingTop = '0';
-                clonedLogoContainer.style.paddingBottom = '8px';
+                clonedLogoContainer.style.paddingBottom = '0px';
                 clonedLogoContainer.style.marginTop = '0';
                 clonedLogoContainer.style.marginBottom = '0';
                 clonedLogoContainer.style.overflow = 'visible';
+                clonedLogoContainer.style.setProperty('height', 'auto', 'important'); // Override !important
             }
 
             if (clonedMarkBottom) {
@@ -129,7 +162,7 @@ downloadBtn.addEventListener('click', () => {
         const link = document.createElement('a');
         const top = logoTextTop.textContent.trim().replace(/\s+/g, '-');
         const bottom = logoTextBottom.textContent.trim().replace(/\s+/g, '-');
-        link.download = `${top}-${bottom}-logo.png`;
+        link.download = `LogoKV-${bottom}.png`;
         link.href = canvas.toDataURL("image/png");
         link.click();
     });
